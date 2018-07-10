@@ -15,13 +15,14 @@ build: ## Build the app in production mode
 	yarn build
 
 test-unit: ## Run the unit tests
-    yarn test
+	yarn test
+
 
 test-accessibility: ## Run the accessibility tests
-    @if [ "$(build)" != "false" ]; then \
-        echo 'Building application (call "make build=false test-accessibility" to skip the build)...'; \
-        ${MAKE} build; \
-    fi
-    yarn test:accessibility
+	@if [ "$(build)" != "false" ]; then \
+		echo 'Building application (call "make build=false test-accessibility" to skip the build)...'; \
+		${MAKE} build; \
+	fi
+	yarn test:accessibility
 
 test: test-unit test-accessibililty ## Run all tests
