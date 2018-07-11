@@ -25,4 +25,4 @@ test-accessibility: ## Run the accessibility tests
 	fi
 	yarn test:accessibility
 
-test: test-unit test-accessibililty ## Run all tests
+test: test-unit test-accessibility ## Run all tests
