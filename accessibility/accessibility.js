@@ -25,7 +25,7 @@ exports.analyzeAccessibility = async (page, screenshotPath, options = {}) => {
         (accessibilityReport.violations.length ||
             accessibilityReport.incomplete.length)
     ) {
-        const path = `${process.cwd()}/screenshots`;
+        const path = `${__dirname}/screenshots`;
         if (!existsSync(path)) {
             mkdirSync(path);
         }
@@ -43,16 +43,15 @@ const defaultOptions = {
     incompleteTreshold: 0,
 };
 
+const printInvalidNode = node => `- ${printReceived(node.html)}\n\t${node.any
+    .map(check => check.message)
+    .join('\n\t')}`;
+
 const printInvalidRule = rule =>
     `${printReceived(rule.help)} on ${
-    rule.nodes.length
+        rule.nodes.length
     } nodes\r\n${rule.nodes
-        .map(
-            node =>
-                `- ${printReceived(node.html)}\n\t${node.any
-                    .map(check => check.message)
-                    .join('\n\t')}`,
-    )
+        .map(printInvalidNode)
         .join('\n')}`;
 
 // Add a new method to expect assertions with a very detailed error report
